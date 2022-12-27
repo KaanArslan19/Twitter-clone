@@ -1,7 +1,5 @@
-import Head from 'next/head'
-
-
-
+import Head from "next/head";
+import Sidebar from "../components/Sidebar";
 
 export default function Home() {
   return (
@@ -12,8 +10,15 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      
-    
+      <main className="flex min-h-screen max-w-7xl mx-auto ">
+        {/* SideBar */}
+        <Sidebar />
+        {/* Feed */}
+
+        {/* Widgets */}
+
+        {/* Modals */}
+      </main>
     </>
-  )
+  );
 }
