@@ -58,7 +58,7 @@ export default function Sidebar() {
           <div className="hoverEffect text-gray-700 flex items-center justify-center xl:justify-start mt-auto">
             <img
               
-             src="../assets/linkedinphoto.jpeg"
+             src="https://media.licdn.com/dms/image/C5603AQEwcVLC21NRIg/profile-displayphoto-shrink_800_800/0/1521533582779?e=1677715200&v=beta&t=BtSAsHZSYbvagJ9wqj5zBFrYbL-6yLObiTizBY4GTj4"
               alt="user-img"
               className="h-10 w-10 rounded-full xl:mr-2"
             />
