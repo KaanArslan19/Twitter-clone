@@ -2,6 +2,8 @@ import Head from "next/head";
 import Feed from "../components/Feed";
 import Sidebar from "../components/Sidebar";
 import Widgets from "../components/Widget";
+import CommentModal from "../components/CommentModal";
+
 
 export default function Home({newsResults, randomUsersResults}) {
   return (
@@ -19,9 +21,10 @@ export default function Home({newsResults, randomUsersResults}) {
         <Feed />
 
         {/* Widgets */}
-        <Widgets newsResults={newsResults.articles}randomUsersResults={randomUsersResults.results} />
+        <Widgets newsResults={newsResults.articles} randomUsersResults={randomUsersResults.results} />
         
         {/* Modals */}
+        <CommentModal />
       </main>
     </>
   );
