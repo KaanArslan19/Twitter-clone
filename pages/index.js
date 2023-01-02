@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Feed from "../components/Feed";
 import Sidebar from "../components/Sidebar";
-import Widgets from "../components/Widget";
+import Widgets from "../components/Widgets";
 import CommentModal from "../components/CommentModal";
 
 
