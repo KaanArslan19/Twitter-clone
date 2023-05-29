@@ -14,6 +14,7 @@ import { getDownloadURL, ref, uploadString } from "firebase/storage";
 import { useState, useRef } from "react";
 import { db, storage } from "../firebase";
 import { useSession, signOut } from "next-auth/react";
+import { ApiKey } from "../temporaryfolder";
 
 export default function Input() {
   const { data: session } = useSession();
@@ -23,7 +24,21 @@ export default function Input() {
   const filePickerRef = useRef(null);
 
   const sendPost = async () => {
+    const options = {
+      method: "GET",
+      headers: { "X-Api-Key": ApiKey },
+    };
+    const apiURL =
+      "https://api.api-ninjas.com/v1/profanityfilter?text=" + input;
+    const response = await fetch(apiURL, options);
 
+    const data = await response.json();
+    console.log(data);
+    if (data.has_profanity) {
+      window.alert("You cant use this word");
+      setInput("");
+      return;
+    }
     if (loading) return;
     setLoading(true);
 
@@ -62,7 +77,7 @@ export default function Input() {
       setSelectedFile(readerEvent.target.result);
     };
   };
- 
+
   return (
     <>
       {session && (
@@ -94,33 +109,32 @@ export default function Input() {
                   className={`${loading && "animate-pulse"}`}
                 />
               </div>
-               )}
+            )}
             <div className="flex items-center justify-between pt-2.5">
-              {!loading && (             
-              <>
-               <div className="flex">
-               <div onClick={() => filePickerRef.current.click()}>
-                 <PhotographIcon className="h-10 w-10 hoverEffect p-2 text-sky-500 hover:bg-sky-100" />
-                 <input
-                   type="file"
-                   hidden
-                   ref={filePickerRef}
-                   onChange={addImageToPost}
-                 />
-               </div>
+              {!loading && (
+                <>
+                  <div className="flex">
+                    <div onClick={() => filePickerRef.current.click()}>
+                      <PhotographIcon className="h-10 w-10 hoverEffect p-2 text-sky-500 hover:bg-sky-100" />
+                      <input
+                        type="file"
+                        hidden
+                        ref={filePickerRef}
+                        onChange={addImageToPost}
+                      />
+                    </div>
 
-               <EmojiHappyIcon className="h-10 w-10 hoverEffect p-2 text-sky-500 hover:bg-sky-100" />
-             </div>
-             <button
-               onClick={sendPost}
-               disabled={!input.trim()}
-               className="bg-blue-400 text-white px-4 py-1.5 rounded-full font-bold shadow-md hover:brightness-95 disabled:opacity-50"
-             >
-               Tweet
-             </button>
-              </>
-              )}   
-             
+                    <EmojiHappyIcon className="h-10 w-10 hoverEffect p-2 text-sky-500 hover:bg-sky-100" />
+                  </div>
+                  <button
+                    onClick={sendPost}
+                    disabled={!input.trim()}
+                    className="bg-blue-400 text-white px-4 py-1.5 rounded-full font-bold shadow-md hover:brightness-95 disabled:opacity-50"
+                  >
+                    Tweet
+                  </button>
+                </>
+              )}
             </div>
           </div>
         </div>
