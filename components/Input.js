@@ -14,7 +14,6 @@ import { getDownloadURL, ref, uploadString } from "firebase/storage";
 import { useState, useRef } from "react";
 import { db, storage } from "../firebase";
 import { useSession, signOut } from "next-auth/react";
-import { ApiKey } from "../temporaryfolder";
 
 export default function Input() {
   const { data: session } = useSession();
@@ -24,9 +23,10 @@ export default function Input() {
   const filePickerRef = useRef(null);
 
   const sendPost = async () => {
+    const apiKey = process.env.NEXT_PUBLIC_PROFANITY_API_KEY;
     const options = {
       method: "GET",
-      headers: { "X-Api-Key": ApiKey },
+      headers: { "X-Api-Key": apiKey },
     };
     const apiURL =
       "https://api.api-ninjas.com/v1/profanityfilter?text=" + input;
